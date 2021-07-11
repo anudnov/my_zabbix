@@ -19,6 +19,6 @@ sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
 sudo systemctl status grafana-server
 
-##########################################
-Grafana на Ubuntu 20.04
-##########################################
+Install Plugins:
+grafana-cli plugins install alexanderzobnin-zabbix-app
+systemctl restart grafana-server
