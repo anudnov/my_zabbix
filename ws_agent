@@ -4,6 +4,7 @@ Open Command Prompt as administrator.
 cd c:\zabbix\
 Run the below command to uninstall the Zabbix service.
 zabbix_agentd.exe --uninstall
+net stop "Zabbix Agent"
 
 New agent 5.4 
 https://cdn.zabbix.com/zabbix/binaries/stable/5.4/5.4.2/zabbix_agent-5.4.2-windows-amd64-openssl.msi
