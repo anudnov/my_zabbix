@@ -1,0 +1,8 @@
+
+Uninstall agent CentOS:
+yum remove zabbix-agent -y
+cd /etc
+rm -rf zabbix
+
+New istallation:
+https://www.zabbix.com/download_agents?version=5.4&release=5.4.2&os=Linux&os_version=3.0&hardware=amd64&encryption=No+encryption&packaging=Archive&show_legacy=0
