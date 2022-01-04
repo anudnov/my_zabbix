@@ -1,0 +1,177 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:09:27Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 0811ed8a0f4d49c98a031dec3c19df0e
+      template: 'Microsoft Windows security auditing'
+      name: 'Microsoft Windows security auditing'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 1d00a7d4333c4c2faacb512993419ea1
+          name: 'Event ID - 4625'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4625,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - |
+                  var lines = value.split("\n");
+                  var lineZero = lines[0];
+                  var accountName = "";
+                  lines.forEach(function(line) {
+                    if (line.trim().substring(0, 13) === "Account Name:") {
+                      accountName = line.substring(14).trim();
+                    }
+                  });
+                  return accountName + " : " + lineZero;
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID'
+          triggers:
+            -
+              uuid: a4f9b7228c1643d38de570d0441f179d
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4625,,skip])=1'
+              name: 'Event ID4625 alert - Logon Failure'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: f586aae9d2494909b29f2a13cce3ca35
+          name: 'Event ID - 4720'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4720,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: c5901c07d0164f4892e68bb4bc6eb59d
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4720,,skip])=1'
+              name: 'Event ID4720 - A user account was created'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: 60e9f1f4d7b848adb35a647efcf0fefc
+          name: 'Event ID - 4722'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4722,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: cdfca9dd46614dfdb169b1250d54a855
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4722,,skip])=1'
+              name: 'Event ID4722 - A user account was enabled'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: 3a3b47af02894bc98d137fc678b8659e
+          name: 'Event ID - 4725'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4725,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 004b8f81416a45aca7cb1daeebfed252
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4725,,skip])=1'
+              name: 'Event ID4725 - A user account was disabled'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: fc561523b7714122b228a9a5b8ecb90d
+          name: 'Event ID - 4726'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4726,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: dcb287abc057479e931056aabbcda35b
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4726,,skip])=1'
+              name: 'Event ID4726 - A user account was deleted'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: 0db7102bf8784250ba4d711c6708944f
+          name: 'Event ID - 4732'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4732,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 08b4ad7b3b024523a7098685bf759977
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4732,,skip])=1'
+              name: 'Event ID4732 - A member was added to a security-enabled local group'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
+        -
+          uuid: a0fb1211ef864f759bc2b3f6a13c14ed
+          name: 'Event ID - 4733'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4733,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 77109434e8954082b76d05fe918d7b54
+              expression: 'logeventid(/Microsoft Windows security auditing/eventlog[Security,,,,4733,,skip])=1'
+              name: 'Event ID4733 - A member was removed from a security-enabled local group'
+              priority: HIGH
+              type: MULTIPLE
+              manual_close: 'YES'
