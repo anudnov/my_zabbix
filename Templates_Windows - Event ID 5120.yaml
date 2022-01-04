@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:55:53Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: e84b6ba9a72e4f21a2fdae88ab5fb9fd
+      template: 'Windows - Event ID 5120'
+      name: 'Windows - Event ID 5120'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: e8d7aab3422741f7bdf8295518369ec4
+          name: 'Event ID monitor - 5120'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[System,,,,5120,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: c72799ef4f2c4eae8864ceeda6acab40
+              expression: 'logeventid(/Windows - Event ID 5120/eventlog[System,,,,5120,,skip])=1'
+              name: 'Event 5120 - Cluster Shared Volume alert'
+              priority: AVERAGE
+              type: MULTIPLE
+              manual_close: 'YES'

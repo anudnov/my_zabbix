@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:55:37Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 5842d74af96e4f078b05ae7e02f2614e
+      template: 'Windows - Event ID 4732 monitoring'
+      name: 'Windows - Event ID 4732 monitoring'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 03207673b2674d4abef90ae62e5fb951
+          name: 'Event ID monitor - 4732'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4732,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 30d4e62642b84ac19f8f698e01cad9fc
+              expression: 'logeventid(/Windows - Event ID 4732 monitoring/eventlog[Security,,,,4732,,skip])=1'
+              name: 'Event ID4732 alert - A member was added to a security-enabled local group.'
+              priority: AVERAGE
+              type: MULTIPLE
+              manual_close: 'YES'

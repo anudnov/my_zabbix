@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:54:53Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: f083fbf5ac0243d28122b90f1c78bd25
+      template: 'Windows - Event ID 4625 monitoring'
+      name: 'Windows - Event ID 4625 monitoring'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 5fc87d621ca84311b0daf42193240df5
+          name: 'Event ID monitor - 4625'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4625,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 38094d6e97364475993cc4dd03490d41
+              expression: 'logeventid(/Windows - Event ID 4625 monitoring/eventlog[Security,,,,4625,,skip])=1'
+              name: 'Event ID4625 alert - Logon Failure'
+              priority: AVERAGE
+              type: MULTIPLE
+              manual_close: 'YES'

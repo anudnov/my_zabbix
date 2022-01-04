@@ -1,0 +1,38 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:56:09Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 20d832e8a310499eaad2173961353d54
+      template: 'Windows - Event ID 21502 - Live migration failed'
+      name: 'Windows - Event ID 21502 - Live migration failed'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: d5cb0f783e3e487097fd5ccabcc2a79a
+          name: 'Event ID - Live migration failed - 21502'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[System,,,,21502,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: bfb4c7f3397248749505e7c784223839
+              expression: 'logeventid(/Windows - Event ID 21502 - Live migration failed/eventlog[System,,,,21502,,skip])=1'
+              name: 'Live migration failed - Event ID21502 (Hyper-v)'
+              priority: AVERAGE
+              description: 'Live migration failed.'
+              type: MULTIPLE
+              manual_close: 'YES'

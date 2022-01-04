@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:55:14Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 78f4e4abef6b4a528e3ee273c9b49b9e
+      template: 'Windows - Event ID 4720 monitoring'
+      name: 'Windows - Event ID 4720 monitoring'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 717369c82bc24979b05e4a130099a72e
+          name: 'Event ID monitor - 4720'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4720,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: c9520429bf4048d0a91d5b9dbb02b89d
+              expression: 'logeventid(/Windows - Event ID 4720 monitoring/eventlog[Security,,,,4720,,skip])=1'
+              name: 'Event ID4720 alert - A new user account was created.'
+              priority: AVERAGE
+              type: MULTIPLE
+              manual_close: 'YES'

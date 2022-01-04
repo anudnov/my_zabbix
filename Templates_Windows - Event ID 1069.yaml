@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-04T09:54:34Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 0bd5e6c2763f4773a206c2578be4640b
+      template: 'Windows - Event ID 1069'
+      name: 'Windows - Event ID 1069'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 0af56569d3db464787acd722764c91e8
+          name: 'Event ID monitor - 1069'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[System,,,,1069,,skip]'
+          delay: 10s
+          history: 30d
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Windows
+              value: 'Event ID alert'
+          triggers:
+            -
+              uuid: 8b5c3896a0184c82a059fb4be900b295
+              expression: 'logeventid(/Windows - Event ID 1069/eventlog[System,,,,1069,,skip])=1'
+              name: 'Hyper-v Cluster resource failed - Event ID1069'
+              priority: AVERAGE
+              type: MULTIPLE
+              manual_close: 'YES'
