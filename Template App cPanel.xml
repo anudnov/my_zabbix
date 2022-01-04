@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-01-02T11:23:54Z</date>
+    <groups>
+        <group>
+            <name>cPanel Services LiveDNS</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App cPanel</template>
+            <name>Template App cPanel</name>
+            <groups>
+                <group>
+                    <name>cPanel Services LiveDNS</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>cPanel</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>SMTP service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,25]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <name>HTTP service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,80]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <name>POP3 service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,110]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <name>HTTPS service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,443]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <name>cPanel User login status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,2083]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{sum(#5)}=0</expression>
+                            <name>cPanel User login status is down (2083)</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Admin Portal service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,2087]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{sum(#5)}=1</expression>
+                            <name>Admin Portal service is down (2087)</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Webmail service status</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[tcp,,2096]</key>
+                    <delay>180s</delay>
+                    <history>30d</history>
+                    <applications>
+                        <application>
+                            <name>cPanel</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{sum(#5)}=0</expression>
+                            <name>Webmail service is down (2096)</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>[cPanel] service statuses</name>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <type>STACKED</type>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Template App cPanel</host>
+                        <key>net.tcp.service[tcp,,2083]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Template App cPanel</host>
+                        <key>net.tcp.service[tcp,,2087]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <item>
+                        <host>Template App cPanel</host>
+                        <key>net.tcp.service[tcp,,2096]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+    <value_maps>
+        <value_map>
+            <name>Service state</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Up</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>

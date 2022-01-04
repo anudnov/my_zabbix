@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2021-04-29T11:47:03Z</date>
+    <groups>
+        <group>
+            <name>CPU use in percentage</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>CPU use in percentage</template>
+            <name>CPU use in percentage</name>
+            <groups>
+                <group>
+                    <name>CPU use in percentage</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>CPU</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Used CPU % perf</name>
+                    <key>perf_counter[total,6]</key>
+                    <delay>1s</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Used CPU %. Test</name>
+                    <key>system.cpu.util[%]</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Used CPU %</name>
+                    <key>system.cpu.util[,,avg5]</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1</params>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(3)}&gt;80</expression>
+                            <name>CPU 80% in use</name>
+                            <status>DISABLED</status>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>CPU use in percentage</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>CPU use in percentage</host>
+                        <key>system.cpu.util[,,avg5]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
