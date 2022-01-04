@@ -1,0 +1,46 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-01-02T09:45:32Z'
+  groups:
+    -
+      uuid: 58860fa649f141c1a8ff6a4d9eb3752f
+      name: 'NS services'
+  templates:
+    -
+      uuid: 8a321bda90064ba18a55add27e2fc8bf
+      template: 'Template App DNS Service'
+      name: 'Template App DNS Service'
+      groups:
+        -
+          name: 'NS services'
+      items:
+        -
+          uuid: 8b62138f572d4fee9785f58f665a9d0d
+          name: 'DNS service is running'
+          type: SIMPLE
+          key: 'net.tcp.service[tcp,,53]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            -
+              tag: Application
+              value: 'DNS service'
+          triggers:
+            -
+              uuid: 61750a703e2840cda550c29be8bff8e4
+              expression: 'max(/Template App DNS Service/net.tcp.service[tcp,,53],#3)=0'
+              name: 'DNS service is down on {HOST.NAME}'
+              priority: AVERAGE
+              manual_close: 'YES'
+      valuemaps:
+        -
+          uuid: c23ba1a8722e4473847919ca8977a58c
+          name: 'Service state'
+          mappings:
+            -
+              value: '0'
+              newvalue: Down
+            -
+              value: '1'
+              newvalue: Up
