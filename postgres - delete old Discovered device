@@ -1,2 +1,2 @@
-select* FROM dservices WHERE status = 1
+select * FROM dservices WHERE status = 1
 DELETE FROM dservices WHERE status = 1;
