@@ -16,6 +16,7 @@ _In your terminal, use the following command to install MariaDB 10.6._
 ```
 sudo apt install software-properties-common -y
 ```
+```
 curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
 sudo bash mariadb_repo_setup --mariadb-server-version=10.6
 ```
