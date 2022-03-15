@@ -67,6 +67,11 @@ Hostname=Zabbix_proxy_hostname
 DBName=zabbix_proxy
 DBUser=zabbix
 ```
+#### Step 4: Start and enable proxy service
+```
+sudo systemctl restart zabbix-proxy
+sudo systemctl enable zabbix-proxy
+```
 
 Thank you.
 https://bestmonitoringtools.com/install-zabbix-proxy-on-ubuntu/
