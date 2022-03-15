@@ -10,9 +10,9 @@ sudo apt update
 sudo apt -y install zabbix-proxy-mysql zabbix-sql-scripts
 ```
 ###### Step 2: Configure database
-_In this installation, I will use password rootDBpass as root database password and zabbixDBpass as Zabbix proxy database password. Consider changing your password for security reasons._
-
-In your terminal, use the following command to install MariaDB 10.6.
+_In this installation, I will use password rootDBpass as root database password and zabbixDBpass as Zabbix proxy database password. Consider changing your password for security reasons.
+In your terminal, use the following command to install MariaDB 10.6._
+```
 sudo apt install software-properties-common -y
 ```
 curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
