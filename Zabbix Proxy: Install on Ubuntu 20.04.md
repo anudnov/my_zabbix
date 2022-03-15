@@ -27,13 +27,31 @@ sudo apt -y install mariadb-common mariadb-server-10.6 mariadb-client-10.6
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 ```
-######## b. Reset root password for database
+###### Reset root password for database
+```
+sudo mysql_secure_installation
+```
+```
+Enter current password for root (enter for none): Press Enter
+Switch to unix_socket authentication [Y/n] y
+Change the root password? [Y/n] y
+New password: <Enter root DB password>
+Re-enter new password: <Repeat root DB password>
+Remove anonymous users? [Y/n]: y
+Disallow root login remotely? [Y/n]: n
+Remove test database and access to it? [Y/n]:  y
+Reload privilege tables now? [Y/n]:  y
+```
+###### Create database
+```
+sudo mysql -uroot -p'rootDBpass' -e "create database zabbix_proxy character set utf8mb4 collate utf8mb4_bin;"
+sudo mysql -uroot -p'rootDBpass' -e "grant all privileges on zabbix_proxy.* to zabbix@localhost identified by 'zabbixDBpass';"
+```
+###### Import initial schema and data
+```
+sudo cat /usr/share/doc/zabbix-sql-scripts/mysql/proxy.sql | mysql -uzabbix -p'zabbixDBpass' zabbix_proxy
+```
 
 
-
-###### 
-###### 
-###### 
-###### 
 Thank you.
 https://bestmonitoringtools.com/install-zabbix-proxy-on-ubuntu/
