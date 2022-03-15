@@ -28,7 +28,7 @@ sudo apt -y install mariadb-common mariadb-server-10.6 mariadb-client-10.6
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 ```
-###### Reset root password for database
+######## Reset root password for database
 ```
 sudo mysql_secure_installation
 ```
@@ -44,17 +44,29 @@ Remove test database and access to it? [Y/n]:  y
 Reload privilege tables now? [Y/n]:  y
 ```
 
-###### Create database
+######## Create database
 ```
 sudo mysql -uroot -p'rootDBpass' -e "create database zabbix_proxy character set utf8mb4 collate utf8mb4_bin;"
 sudo mysql -uroot -p'rootDBpass' -e "grant all privileges on zabbix_proxy.* to zabbix@localhost identified by 'zabbixDBpass';"
 ```
 
-###### Import initial schema and data
+######## Import initial schema and data
 ```
 sudo cat /usr/share/doc/zabbix-sql-scripts/mysql/proxy.sql | mysql -uzabbix -p'zabbixDBpass' zabbix_proxy
 ```
 
+#### Step 3: Zabbix proxy configuration
+```
+sudo nano /etc/zabbix/zabbix_proxy.conf
+```
+```
+DBPassword=zabbixDBpass
+ConfigFrequency=100
+Server=Zabbix_Server_address
+Hostname=Zabbix_proxy_hostname
+DBName=zabbix_proxy
+DBUser=zabbix
+```
 
 Thank you.
 https://bestmonitoringtools.com/install-zabbix-proxy-on-ubuntu/
