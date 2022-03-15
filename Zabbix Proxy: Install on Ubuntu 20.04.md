@@ -42,11 +42,13 @@ Disallow root login remotely? [Y/n]: n
 Remove test database and access to it? [Y/n]:  y
 Reload privilege tables now? [Y/n]:  y
 ```
+
 ###### Create database
 ```
 sudo mysql -uroot -p'rootDBpass' -e "create database zabbix_proxy character set utf8mb4 collate utf8mb4_bin;"
 sudo mysql -uroot -p'rootDBpass' -e "grant all privileges on zabbix_proxy.* to zabbix@localhost identified by 'zabbixDBpass';"
 ```
+
 ###### Import initial schema and data
 ```
 sudo cat /usr/share/doc/zabbix-sql-scripts/mysql/proxy.sql | mysql -uzabbix -p'zabbixDBpass' zabbix_proxy
