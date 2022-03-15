@@ -1,4 +1,4 @@
-Zabbix Proxy: Install on Ubuntu 20.04
+### Zabbix Proxy: Install on Ubuntu 20.04
 
 ###### Step 1: Install Zabbix Proxy on Ubuntu
 Setup Zabbix 6 .deb package and install proxy server:
