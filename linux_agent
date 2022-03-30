@@ -13,8 +13,6 @@ https://www.zabbix.com/download_agents?version=5.4&release=5.4.2&os=Linux&os_ver
 ######################################################################################################################################
 ######################################################################################################################################
 ######################################################################################################################################
-CENTOS 6
-############################################################################################################
 Remove zabbix agent:
 
 rpm -qa | grep -i zabbi
@@ -51,3 +49,13 @@ iptables -I INPUT -s 10.0.0.0/24 -p udp -m udp --dport 10050 -j ACCEPT
 service iptables save
 service iptables restart
 iptables -L -n |grep "10050"
+
+####################################################
+CentOS7
+#Check zone
+firewall-cmd --get-default-zone
+#zone = public.
+#port = 10050 (zabbix)
+	firewall-cmd --zone=public --permanent --add-port=10050/tcp
+# save configuration
+	firewall-cmd --reload
