@@ -12,6 +12,7 @@ nano /etc/zabbix/zabbix_agentd.conf
 ```
 ```
 sudo systemctl restart zabbix-agent
+sudo systemctl enable zabbix-agent
 sudo systemctl status zabbix-agent
 ```
 ```
