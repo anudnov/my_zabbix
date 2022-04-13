@@ -71,12 +71,12 @@ service iptables save
 service iptables restart
 iptables -L -n |grep "10050"
 
-####################################################
+
 CentOS7
-#Check zone
+Check zone
 firewall-cmd --get-default-zone
-#zone = public.
-#port = 10050 (zabbix)
+zone = public.
+port = 10050 (zabbix)
 	firewall-cmd --zone=public --permanent --add-port=10050/tcp
-# save configuration
+ save configuration
 	firewall-cmd --reload
