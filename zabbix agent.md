@@ -3,17 +3,20 @@ Install Zabbix 6 on Ubuntu 20.04|18.04
 wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
 sudo dpkg -i zabbix-release_6.0-1+ubuntu20.04_all.deb
 ```
-
+```
 sudo apt update
 sudo apt install zabbix-agent
-
+```
+```
 nano /etc/zabbix/zabbix_agentd.conf
-
+```
+```
 sudo systemctl restart zabbix-agent
 sudo systemctl status zabbix-agent
-
+```
+```
 sudo ufw allow 10050/tcp
-
+```
 ######################################################################################################################################
 ######################################################################################################################################
 
