@@ -1,0 +1,6 @@
+SSH Authentication alerts
+
+Add permission. 
+```
+chgrp zabbix /var/log/secure
+```
