@@ -1,0 +1,59 @@
+zabbix_export:
+  version: '6.0'
+  date: '2022-05-22T06:24:58Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 1e8702a765364b68bb0a2845cc9950a7
+      template: 'SSH Authentication alerts'
+      name: 'SSH Authentication alerts'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 4a978e5df76d4385964e03db2e3c59d2
+          name: 'SSH Login successful'
+          type: ZABBIX_ACTIVE
+          key: 'log[/var/log/secure,Accepted]'
+          delay: 5m
+          history: 14d
+          trends: '0'
+          value_type: LOG
+          triggers:
+            -
+              uuid: ff8cb174051e4622bda6fb629075767f
+              expression: 'count(/SSH Authentication alerts/log[/var/log/secure,Accepted],1)=1'
+              name: 'SSH Successful login'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 24375674595e48898f3dbecdf30c90de
+          name: 'SSH Failed password'
+          type: ZABBIX_ACTIVE
+          key: 'log[/var/log/secure,Failed]'
+          delay: 5m
+          history: 14d
+          trends: '0'
+          value_type: LOG
+        -
+          uuid: ba95622fa3214abeafdca58fceab647c
+          name: 'SSH Authentication failure'
+          type: ZABBIX_ACTIVE
+          key: 'log[/var/log/secure,failure]'
+          delay: 5m
+          history: 14d
+          trends: '0'
+          value_type: LOG
+  triggers:
+    -
+      uuid: 66f175c296d94bfe9c7b5a47b36042a3
+      expression: |
+        count(/SSH Authentication alerts/log[/var/log/secure,Failed],1)=1 or
+        count(/SSH Authentication alerts/log[/var/log/secure,failure],1)=1
+      name: 'SSH Failed Authentication'
+      priority: HIGH
+      manual_close: 'YES'
