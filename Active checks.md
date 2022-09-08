@@ -5,3 +5,7 @@ Configuration file:
 ServerActive=
 Hostname=
 ```
+Allow access to log file:
+```
+chgrp zabbix /var/log/audit
+```
