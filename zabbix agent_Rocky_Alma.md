@@ -25,6 +25,8 @@ rpm -qi zabbix-agent
 ```
 vi /etc/zabbix/zabbix_agentd.conf
 ```
-_Server=10.70.5.218
-ServerActive=10.70.5.218
-Hostname=dev-rockysrv1_
+```
+Server=10.10.10.10
+ServerActive=10.10.10.10
+Hostname=localhost_server_name
+```
