@@ -1,3 +1,4 @@
+### Install the Zabbix Agent
 ```
 sudo dnf -y update
 sudo dnf install -y vim
@@ -14,3 +15,16 @@ _sudo dnf install -y https://repo.zabbix.com/zabbix/6.0/rhel/8/x86_64/zabbix-rel
 ```
 sudo dnf install -y zabbix-agent
 ```
+
+#### Confirm the software version installed:
+```
+rpm -qi zabbix-agent
+```
+
+#### Configure Zabbix Agent
+```
+vi /etc/zabbix/zabbix_agentd.conf
+```
+_Server=10.70.5.218
+ServerActive=10.70.5.218
+Hostname=dev-rockysrv1_
