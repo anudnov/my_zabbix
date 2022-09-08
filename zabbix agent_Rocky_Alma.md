@@ -30,3 +30,18 @@ Server=10.10.10.10
 ServerActive=10.10.10.10
 Hostname=localhost_server_name
 ```
+#### Disable SELinux and Adjust Firewall for Zabbix
+```
+firewall-cmd --permanent --add-port=10050/tcp
+firewall-cmd --reload
+```
+```
+sudo setenforce 0
+sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+```
+
+#### Start and enable the Zabbix agent
+```
+sudo systemctl start zabbix-agent
+sudo systemctl enable zabbix-agent
+```
