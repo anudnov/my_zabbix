@@ -46,3 +46,7 @@ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
 sudo systemctl start zabbix-agent
 sudo systemctl enable zabbix-agent
 ```
+#### Restart service
+```
+service zabbix-agent restart && service zabbix-agent status
+```
