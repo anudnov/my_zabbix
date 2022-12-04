@@ -2,6 +2,8 @@
 sudo -u postgres psql
 # Listing Databases
 postgres=# \l
+# Switching Databases
+postgres=# \c zabbix
 
 
 ###########################################################################################
