@@ -1,5 +1,5 @@
 # 1. connect to the db:
-sudo -u USER psql
+sudo -u postgres psql
 
 ###########################################################################################
 # 2. delete history and no needed information:
