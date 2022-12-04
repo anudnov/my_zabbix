@@ -1,5 +1,8 @@
 # 1. connect to the db:
 sudo -u postgres psql
+# Listing Databases
+postgres=# \l
+
 
 ###########################################################################################
 # 2. delete history and no needed information:
