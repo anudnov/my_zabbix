@@ -1,4 +1,4 @@
-#### Step 1: Install Zabbix Proxy on Ubuntu
+### Install Zabbix Proxy on Ubuntu
 Zabbix 6.4 standard version (supported until November, 2023)
 ```
 wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu$(lsb_release -rs)_all.deb
@@ -6,7 +6,7 @@ sudo dpkg -i zabbix-release_6.4-1+ubuntu$(lsb_release -rs)_all.deb
 sudo apt update
 sudo apt -y install zabbix-proxy-mysql zabbix-sql-scripts
 ```
-#### Step 2: Configure database
+#### Configure database
 ```
 sudo apt install software-properties-common -y
 ```
@@ -37,4 +37,30 @@ Remove anonymous users? [Y/n]: y
 Disallow root login remotely? [Y/n]: y
 Remove test database and access to it? [Y/n]:  y
 Reload privilege tables now? [Y/n]:  y
+```
+#### Create database
+```
+sudo mysql -uroot -p'rootDBpass' -e "create database zabbix_proxy character set utf8mb4 collate utf8mb4_bin;"
+sudo mysql -uroot -p'rootDBpass' -e "grant all privileges on zabbix_proxy.* to zabbix@localhost identified by 'zabbixDBpass';"
+```
+#### Import initial schema and data.
+```
+sudo cat /usr/share/zabbix-sql-scripts/mysql/proxy.sql | mysql --default-character-set=utf8mb4 -uzabbix -p'zabbixDBpass' zabbix_proxy
+```
+ ### Zabbix proxy configuration
+```
+ sudo nano /etc/zabbix/zabbix_proxy.conf
+```
+```
+DBPassword=zabbixDBpass
+ConfigFrequency=100
+
+Server=10.113.44.235
+Hostname=Zabbix proxy 01
+DBName=zabbix_proxy
+DBUser=zabbix
+```
+```
+sudo systemctl restart zabbix-proxy
+sudo systemctl enable zabbix-proxy
 ```
